@@ -56,7 +56,7 @@ def fernet_encrypt(filename,key):
             file.write(encrypted_data)
             messagebox.showinfo("Encryption Successful", "Your file is encrypted :)")
     except:
-        messagebox.showerror("Encryption ERROR", "ERROR: Key or File Type incorrect.")
+        messagebox.showerror("Encryption ERROR", "ERROR: Key or File incorrect.")
 
 #decrypt function
 def fernet_decrypt (filename,key):
@@ -70,7 +70,7 @@ def fernet_decrypt (filename,key):
             file.write(decrypted_data)
             messagebox.showinfo("Decryption Successful", "Your file is decrypted :)")
     except:
-        messagebox.showerror("Decryption ERROR", "ERROR: Key or File Type incorrect.")
+        messagebox.showerror("Decryption ERROR", "ERROR: Key or File incorrect.")
 
 def aes_encrypt(filename,password):
     try:
@@ -79,7 +79,7 @@ def aes_encrypt(filename,password):
                 pyAesCrypt.encryptStream(fIn, fOut, password, bufferSize)
                 messagebox.showinfo("Encryption Successful", "Your file is encrypted :)")
     except: 
-        messagebox.showerror("Encryption ERROR", "ERROR: Password or File Type not correct.")
+        messagebox.showerror("Encryption ERROR", "ERROR: Password or File incorrect.")
                 
         
 def aes_decrypt(filename,password):
@@ -88,9 +88,9 @@ def aes_decrypt(filename,password):
         with open(filename, "rb") as fIn:
             with open(filename[:-6], "wb") as fOut:
                 pyAesCrypt.decryptStream(fIn, fOut, password, bufferSize, encFileSize)
-                messagebox.showinfo("Encryption Successful", "Your file is encrypted :)")
+                messagebox.showinfo("Decryption Successful", "Your file is decrypted :)")
     except:
-        messagebox.showerror("Decryption ERROR", "ERROR: Password or File Type not correct.")
+        messagebox.showerror("Decryption ERROR", "ERROR: Password or File incorrect.")
 
 def hide_frames():
     fernetFrame.grid_forget()
