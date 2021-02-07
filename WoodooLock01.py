@@ -72,8 +72,9 @@ def fernet_decrypt (filename,key):
     except:
         messagebox.showerror("Decryption ERROR", "ERROR: Key or File incorrect.")
 
-def aes_encrypt(filename,password):
+def aes_encrypt(filename):
     try:
+        password = aes_password.get()
         with open(filename, "rb") as fIn:
             with open(filename + ".alock", "wb") as fOut:
                 pyAesCrypt.encryptStream(fIn, fOut, password, bufferSize)
@@ -82,8 +83,9 @@ def aes_encrypt(filename,password):
         messagebox.showerror("Encryption ERROR", "ERROR: Password or File incorrect.")
                 
         
-def aes_decrypt(filename,password):
+def aes_decrypt(filename):
     try:
+        password = aes_password.get()
         encFileSize = stat(filename).st_size
         with open(filename, "rb") as fIn:
             with open(filename[:-6], "wb") as fOut:
@@ -125,10 +127,9 @@ miniframe = tk.Frame(aesFrame,bg=dbrown)
 
 aes_label = tk.Label(miniframe,text="Enter Password: ",bg=dbrown,fg="white",)
 aes_password = tk.Entry(miniframe,justify="center",show="*",bg=mbrown,fg="white",)
-password = aes_password.get()
 aes_selectFile = Button(aesFrame,bg=dbrown,fg="white",width=250,height=50,textvariable=filestatus,command=load_File)
-aes_encryptFile = Button(aesFrame,bg=dbrown,fg="white",width=250,height=50,text="Encrypt File",command=lambda: aes_encrypt(filename,password))
-aes_decryptFile = Button(aesFrame,bg=dbrown,fg="white",width=250,height=50,text="Decrypt File",command=lambda: aes_decrypt(filename,password))
+aes_encryptFile = Button(aesFrame,bg=dbrown,fg="white",width=250,height=50,text="Encrypt File",command=lambda: aes_encrypt(filename))
+aes_decryptFile = Button(aesFrame,bg=dbrown,fg="white",width=250,height=50,text="Decrypt File",command=lambda: aes_decrypt(filename))
 
 
 #Positioning objects
