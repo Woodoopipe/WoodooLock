@@ -2,7 +2,7 @@
 import os
 import sys
 from os import stat
-import tkinter as tk 
+import tkinter as tk
 from tkinter import filedialog, StringVar, IntVar, messagebox
 from cryptography.fernet import Fernet
 import pyAesCrypt
@@ -16,10 +16,11 @@ dorange = "#ff4d04"
 mbrown = "#29211f"
 #MainWindow Config
 window = tk.Tk()
+window.iconbitmap('wl.ico')
 window.configure(bg=dbrown)
 window.title("WoodooLock - 0.0.1")
 window.resizable(width=False, height=False)
-title = tk.Label(window,text="Select encryption type",bg=dbrown,fg="white")
+title = tk.Label(window,text="Select encryption type",bg=dbrown,fg="#D4D494")
 #Define Key/File status Label
 keystatus = StringVar()
 keystatus.set("Select Key")
@@ -97,20 +98,24 @@ def aes_decrypt(filename):
 def hide_frames():
     fernetFrame.grid_forget()
     aesFrame.grid_forget()
+    fernetButton.configure(state="normal")
+    aesButton.configure(state="normal")
 def fernet_menu():
     hide_frames()
     fernetFrame.grid(row=3,columnspan=4)
+    fernetButton.configure(state="active")
 
 def aes_menu():
     hide_frames()
     aesFrame.grid(row=3,columnspan=4)
+    aesButton.configure(state="active")
 
 
 key = None
 filename = None
 #Declare GUI
-fernetButton = Button(window,bg=dbrown,fg="white",width=250,height=50,text="Fernet Crypt",command=lambda: fernet_menu())
-aesButton = Button(window,bg=dbrown,fg="white",width=250,height=50,text="AES Crypt", command=lambda: aes_menu())
+fernetButton = Button(window,activebackground=('#000000', '#D4D494'),bg=dbrown,fg="white",width=250,height=50,text="Fernet Crypt",command=lambda: fernet_menu())
+aesButton = Button(window,activebackground=('#000000', '#D4D494'),bg=dbrown,fg="white",width=250,height=50,text="AES Crypt", command=lambda: aes_menu())
 #Fernet GUI
 fernetFrame = tk.Frame(window)
 fernet_makeKey = Button(fernetFrame,bg=dbrown,fg="white",width=125,height=50,text="Generate a Key",command=make_fernet_Key)
