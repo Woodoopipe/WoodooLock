@@ -18,7 +18,7 @@ mbrown = "#29211f"
 window = tk.Tk()
 window.iconbitmap('wl.ico')
 window.configure(bg=dbrown)
-window.title("WoodooLock - 0.0.1")
+window.title("WoodooLock - 1.0.0")
 window.resizable(width=False, height=False)
 title = tk.Label(window,text="Select encryption type",bg=dbrown,fg="#D4D494")
 #Define Key/File status Label
