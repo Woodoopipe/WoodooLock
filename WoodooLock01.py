@@ -37,14 +37,27 @@ def make_fernet_Key():
 
 def fernet_load_Key():
     global key
-    key = filedialog.askopenfilename(defaultextension=".key")
-    keystatus.set(os.path.basename(key))
+    key = filedialog.askopenfilename(title="Open your Fernet .key file",filetypes=[("Fernet Key", ".key")],defaultextension=".key")
+    if (key == key):
+        keystatus.set(os.path.basename(key))
+        fernet_selectKey.configure(fg="#D4D494")
+    if not key:
+        keystatus.set("Select Key")
+        fernet_selectKey.configure(fg="white")
 
 #Loading file
 def load_File():
-    global filename 
-    filename = filedialog.askopenfilename()
-    filestatus.set(os.path.basename(filename))
+        global filename 
+        filename = filedialog.askopenfilename(title="Select File to Encrypt/Decrypt")
+        if (filename == filename):
+            filestatus.set(os.path.basename(filename))
+            aes_selectFile.configure(fg="#D4D494")
+            fernet_selectFile.configure(fg="#D4D494")
+        if not filename:
+            filestatus.set("Select File")
+            aes_selectFile.configure(fg="white")
+            fernet_selectFile.configure(fg="white")
+
 #encrypt function
 def fernet_encrypt(filename,key):
     try: 
@@ -82,8 +95,7 @@ def aes_encrypt(filename):
                 messagebox.showinfo("Encryption Successful", "Your file is encrypted :)")
     except: 
         messagebox.showerror("Encryption ERROR", "ERROR: Password or File incorrect.")
-                
-        
+                       
 def aes_decrypt(filename):
     try:
         password = aes_password.get()
@@ -109,7 +121,6 @@ def aes_menu():
     hide_frames()
     aesFrame.grid(row=3,columnspan=4)
     aesButton.configure(state="active")
-
 
 key = None
 filename = None
